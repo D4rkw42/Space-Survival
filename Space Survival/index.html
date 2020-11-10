@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="src/main.css" />
+        <link rel="icon" href="images/icon.png" />
+        <title>Space Survival</title>
+    </head>
+    <body>
+        <nav id="nav">
+            <p id="pontos">Pontos: 0</p>
+            <p id="record">Record: 0</p>
+            <img id="pauseButton" onclick="pause()" src="images/pause.png" >
+        </nav>
+        <canvas id="canvas" width="800" height="500">
+            <img id="ship" src="images/ship.png" />
+            <img id="m1" src="images/meteors/m1.png" />
+            <img id="m2" src="images/meteors/m2.png" />
+            <img id="m3" src="images/meteors/m3.png" />
+            <img id="e1" src="images/explosions/e1.png" />
+            <img id="e2" src="images/explosions/e2.png" />
+            <img id="e3" src="images/explosions/e3.png" />
+            <img id="e4" src="images/explosions/e4.png" />
+            <img id="e5" src="images/explosions/e5.png" />
+            <img id="e6" src="images/explosions/e6.png" />
+            <img id="boss" src="images/boss.png" />
+            <img id="mis1" src="images/missiles/mis1.png" />
+            <img id="mis2" src="images/missiles/mis2.png" />
+            <img id="mis3" src="images/missiles/mis3.png" />
+            <img id="entireHeart" src="images/life/entireHeart.png" >
+            <img id="midHeart" src="images/life/midHeart.png" />
+        </canvas>
+    </body>
+    <script>
+        const canvas= document.getElementById("canvas");
+        const context= canvas.getContext("2d");
+        const random= (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+        const width= 800;
+        const height= 500;
+        var gaming= true;
+        var shoots= [];
+        var meteors= [];
+        var explosions= [];
+        var missiles= [];
+        var powerUps= [];
+        const pause= function() {
+            let button= document.getElementById("pauseButton");
+            if (gaming) {
+                gaming= false;
+                button.src="images/play.png";
+            } else {
+                gaming= true;
+                button.src="images/pause.png";
+            };
+        };
+        canvas.style.left= (window.innerWidth / 2 - width / 2).toString() + "px";
+        canvas.style.top= (window.innerHeight / 2 - height / 2).toString() + "px";
+    </script>
+    <script src="src/classes/PowerUp.js"></script>
+    <script src="src/classes/Missile.js"></script>
+    <script src="src/classes/Explosion.js"></script>
+    <script src="src/classes/Meteor.js"></script>
+    <script src="src/classes/Shoot.js"></script>
+    <script src="src/classes/Boss.js"></script>
+    <script src="src/classes/Ship.js"></script>
+    <script src="src/main.js"></script>
+</html>

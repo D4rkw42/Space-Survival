@@ -1,0 +1,24 @@
+@charset "UTF-8";
+body {
+    background: rgb(37, 37, 37);
+}
+#canvas {
+    position: absolute;
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 150%;
+    border: solid 3px gray;
+    left: 0px;
+    top: 0px;
+}
+#nav {
+    position: absolute;
+    left: 30px;
+    top: 100px;
+    color: gray;
+    font: normal 16pt Arial;
+}
+#pauseButton {
+    width: 30px;
+    height: 30px;
+}
