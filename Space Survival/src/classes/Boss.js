@@ -1,6 +1,5 @@
 class Boss {
     constructor(missileDamage) {
-        this.shootDamage= shootDamage;
         this.missileDamage= missileDamage;
         this.y= -400;
         this.countMissile= 0;
