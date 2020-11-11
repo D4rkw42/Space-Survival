@@ -11,6 +11,16 @@ const audios= {
         audio.appendChild(source);
         audio.play();
         setTimeout(() => document.body.removeChild(audio), 2500);
+    },
+    lazer: () => {
+        let audio= document.createElement("audio");
+        let source= document.createElement("source");
+        document.body.appendChild(audio);
+        source.src="audio/lazer.mp3";
+        audio.appendChild(source);
+        audio.currentTime= 1;
+        audio.play();
+        setTimeout(() => document.body.removeChild(audio), 2500);
     }
 };
 var ship;
@@ -20,6 +30,7 @@ var record= 0;
 var pontos;
 var powerCount;
 var extraStrength= 0;
+var shooted= 0;
 var spawnMeteors, spawnCount, meteorsCount, countShoot, meteorSpeed, missileDamage, meteorsDestroyed, loadBoss;
 var keys= {
     ArrowUp: {status: false},
@@ -29,6 +40,7 @@ var keys= {
     k: {status: false, shoot: true}
 };
 const init= function() {
+    shooted= 0;
     extraStrength= 0;
     powerCount= 0;
     spawnCount= 5000;
@@ -126,6 +138,11 @@ const action= function() {
                     shoots.push(new Shoot(ship.x + 12, ship.y - 5, -5, "ship", "red"));
                     shoots.push(new Shoot(ship.x + 52, ship.y - 5, -5, "ship", "red"));
                     keys.k.shoot= false;
+                    shooted++;
+                    if (shooted>= 6) {
+                        shooted= 0;
+                        audios.lazer();
+                    };
                 };
             }
         };
@@ -133,10 +150,6 @@ const action= function() {
             actions[pos]();
         };
     };
-    if (ship.y + 65> height) ship.y= height - 65;
-    if (ship.y< 0) ship.y= 0;
-    if (ship.x + 65> width) ship.x= width - 65;
-    if (ship.x< 0) ship.x= 0;
 };
 const colide= function() {
     for (let pos in meteors) {
@@ -182,6 +195,10 @@ const update= function() {
     action();
     destroy();
     colide();
+    if (ship.y + 65> height) ship.y= height - 65;
+    if (ship.y< 0) ship.y= 0;
+    if (ship.x + 65> width) ship.x= width - 65;
+    if (ship.x< 0) ship.x= 0;
     for (let pos in meteors) {
         meteors[pos].draw();
         if (meteors[pos].y> height + 100) delete meteors[pos];
